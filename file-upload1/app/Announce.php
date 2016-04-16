@@ -6,9 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Announce extends Model
 {
-    public function user()
-    {
-        return $this->belongsTo('App\User');
-        
-    }
+	/**
+     * Fillable fields
+     * 
+     * @var array
+     */
+	protected $fillable = [
+	'title',
+	'description'
+	];
 }

@@ -11,31 +11,33 @@
 |
 */
 
-Route::get('/', function () {
-    return view('announce.index');
-});
+//----------------------Announce---------------------------//
+
+Route::get('/announce/index', 'AnnounceController@index');
+Route::get('/announce/show/{id}', 'AnnounceController@show');
+Route::get('/announce/edit/{id}', 'AnnounceController@edit');
+Route::put('/announce/edit/{id}', 'AnnounceController@update');
+Route::post('/announce/create', 'AnnounceController@store');
+Route::get('/announce/create', 'AnnounceController@create');
+Route::delete('/announce/destroy/{id}', 'AnnounceController@destroy');
 
 //------------Auth--------------------------------------//
 
+Route::get('/', function () {
+    return view('auth/home');
+});
+
 Route::auth();
 
-Route::get('/auth/home', 'HomeController@index');
-Route::get('/auth/edit', 'HomeController@edit');
+Route::get('auth/index', 'HomeController@index');
+Route::get('auth/show/{id}', 'HomeController@show');
+Route::get('auth/edit/{id}', 'HomeController@edit');
+Route::put('auth/edit/{id}', 'HomeController@update');
+Route::delete('auth/destroy', 'HomeController@destroy');
 
 Route::get('index', function(){
 	return view('index');
 })->middleware('auth');
-
-//----------------------Announce---------------------------//
-
-Route::get('announce', function(){
-	return view('announce.index');
-});
-
-Route::get('announce/create', 'ImageController@upload');
-Route::post('announce/create', 'ImageController@store');
-Route::get('announce/view/{id}', 'ImageController@show');
-Route::get('announce/edit/{id}', 'ImageController@edit');
 
 
 //-------------------Image------------------------------//

@@ -1,40 +1,24 @@
 @extends('layouts.main')
 
-<h1 class="well well-lg">Upload Image</h1>
-<div class="container">
-    @if(isset($success))
-    <div class="alert alert-success"> {{$success}} </div>
-    @endif
-    {!! Form::open(['action'=>'ImageController@store', 'files'=>true]) !!}
-
-    <div class="form-group">
-        {!! Form::label('title', 'Title:') !!}
-        {!! Form::text('title', null, ['class'=>'form-control']) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::label('description', 'Description:') !!}
-        {!! Form::textarea('description', null, ['class'=>'form-control', 'rows'=>5] ) !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::label('image', 'Choose an image') !!}
-        {!! Form::file('image') !!}
-    </div>
-
-    <div class="form-group">
-        {!! Form::submit('Save', array( 'class'=>'btn btn-danger form-control' )) !!}
-    </div>
-
-    {!! Form::close() !!}
-    <div class="alert-warning">
-        @foreach( $errors->all() as $error )
-        <br> {{ $error }}
-        @endforeach
-    </div>
-</div>
-
 @section('content')
 
+<div id="create" style="width: 600px; margin-right: auto; margin-left: auto;">
+
+<h1>Create Announce</h1>
+    {!! Form::open(['url' => 'announce/create']) !!}
+    
+    <div class="form-group">
+        {!! Form::label('Title', 'Title:') !!}
+        {!! Form::text('title',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::label('Description', 'Description:') !!}
+        {!! Form::text('description',null,['class'=>'form-control']) !!}
+    </div>
+    <div class="form-group">
+        {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
+    </div>
+    {!! Form::close() !!}
+</div>
 
 @endsection

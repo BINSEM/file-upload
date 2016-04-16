@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Announce;
 
 use App\Http\Requests;
+
+use App\Http\Controllers\Controller;
+
+use Illuminate\Http\Request;
 
 class AnnounceController extends Controller
 {
@@ -13,9 +17,12 @@ class AnnounceController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('/announce/view')
+        $announce = Announce::all();
+
+        return view('announce.index', compact('announce'));
+
     }
 
     /**
@@ -25,7 +32,7 @@ class AnnounceController extends Controller
      */
     public function create()
     {
-        //
+        return view('announce.create');
     }
 
     /**
@@ -36,7 +43,12 @@ class AnnounceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $input = $request->all();
+
+        Announce::create($input);
+        
+        return redirect('announce/index');
     }
 
     /**
@@ -47,7 +59,9 @@ class AnnounceController extends Controller
      */
     public function show($id)
     {
-        //
+        $announce = Announce::find($id);
+
+        return view('announce.show', compact('announce'));
     }
 
     /**
@@ -58,7 +72,9 @@ class AnnounceController extends Controller
      */
     public function edit($id)
     {
-        //
+     $announce = Announce::find($id);
+
+     return view('announce.edit', compact('announce'));
     }
 
     /**
@@ -70,7 +86,10 @@ class AnnounceController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $announceUpdate = $request->all();
+        $announce = Announce::find($id);
+        $announce->update($announceUpdate);
+        return redirect('announce/index');
     }
 
     /**
@@ -79,8 +98,12 @@ class AnnounceController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, Announce $announce)
     {
-        //
+        $this->authorize('destroy', $announce);
+
+        $announce->delete();
+
+        return redirect('announce/index');
     }
 }

@@ -47,8 +47,8 @@
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/auth/home') }}">Home</a></li>
-                    <li><a href="{{ url('/auth/edit') }}">edit</a></li>
+                    <li><a href="{{ url('/auth/index') }}">Home</a></li>
+                    <li><a href="{{ url('/auth/edit/{id}') }}">edit</a></li>
 
                 </ul>
 
