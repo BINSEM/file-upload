@@ -100,7 +100,7 @@ class AnnounceController extends Controller
      */
     public function destroy(Request $request, Announce $announce)
     {
-        $this->authorize('destroy', $announce);
+        $this->authorize('destroy/{id}', $announce);
 
         $announce->delete();
 
